@@ -1,0 +1,40 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+.current-word {
+  color: blue;
+  background: green;
+}
+
+.wrong-write-word {
+  color: purple;
+}
+
+.current-letter-highlight {
+  padding: 2px;
+  background: rgb(54, 54, 54);
+  color: white;
+}
+
+.wrong-write-letter {
+  padding: 2px;
+  background: red;
+  color: white;
+}
+
+.correct-write-letter {
+  background: green;
+  color: white;
+}
+
+.letter-space {
+  padding-left: 3px;
+  padding-right: 3px;
+}
