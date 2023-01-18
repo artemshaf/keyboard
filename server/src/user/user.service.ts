@@ -1,26 +1,56 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { User } from './entity/user.entity';
+import { RoleService } from './../role/role.service';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/sequelize';
+import { CreateUserDto } from './dto/create-user.dto';
+import { User } from './models/user.model';
+import { AddRoleUserDto } from './dto/add-role-user.dto';
+import {
+  ROLE_NOT_EXISTS,
+  USER_DEFAULR_ROLE,
+  USER_NOT_EXISTS,
+  USER_ROLE,
+  USER_ROLES,
+} from './user.constants';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectRepository(User) private usersRepo: Repository<User>) {}
+  constructor(
+    @InjectModel(User) private userRepository: typeof User,
+    private roleService: RoleService,
+  ) {}
 
-  async get() {
-    return this.usersRepo.find();
+  async create(userDto: CreateUserDto) {
+    const user = await this.userRepository.create(userDto);
+    const role = await this.roleService.getRoleByValye(USER_DEFAULR_ROLE);
+    await user.$set(USER_ROLES, [role.id]);
+    user.roles = [role];
+    return user;
   }
 
-  // async create(body: any) {
-  //   const profile = new Profile();
-  //   profile.name = body.name;
-  //   profile.lastName = body.lastName;
-  //   const newProfile = await this.profilesRepo.save(profile);
+  async getAllUsers() {
+    const users = this.userRepository.findAll();
+    return users;
+  }
 
-  //   const user = new User();
-  //   user.email = body.email;
-  //   user.password = body.password;
-  //   user.profile = newProfile;
-  //   return this.usersRepo.save(user);
-  // }
+  async getUserByEmail(email: string) {
+    const user = await this.userRepository.findOne({
+      where: { email },
+      include: {
+        all: true,
+      },
+    });
+    return user;
+  }
+
+  async addRole(useRoleDto: AddRoleUserDto) {
+    const user = await this.userRepository.findByPk(useRoleDto.userId);
+    if (!user) {
+      throw new HttpException(USER_NOT_EXISTS, HttpStatus.NOT_FOUND);
+    }
+    const role = await this.roleService.getRoleByValye(useRoleDto.value);
+    if (!role) {
+      throw new HttpException(ROLE_NOT_EXISTS, HttpStatus.NOT_FOUND);
+    }
+    await user.$add(USER_ROLE, role.id);
+  }
 }

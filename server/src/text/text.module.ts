@@ -1,12 +1,15 @@
 import { TextController } from './text.controller';
 import { Module } from '@nestjs/common';
-import { Result } from './entity/user_text.entity';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { TextService } from './text.service';
+import { Text } from './models/text.model';
+import { SequelizeModule } from '@nestjs/sequelize';
+import { UserText } from './models/uset-text.model';
+import { User } from '../user/models/user.model';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Result])],
+  imports: [SequelizeModule.forFeature([Text, UserText, User])],
   controllers: [TextController],
   providers: [TextService],
+  exports: [TextService],
 })
 export class TextModule {}

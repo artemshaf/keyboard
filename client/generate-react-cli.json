@@ -11,7 +11,7 @@
         "index": "react-cli-templates/component/index.tsx"
       },
       "path": "src/app/components",
-      "withStyle": true,
+      "withStyle": false,
       "withStory": false,
       "withLazy": false,
       "withIndex": true,
@@ -25,7 +25,7 @@
         "index": "react-cli-templates/component/index.tsx"
       },
       "path": "src/app/components/Plain",
-      "withStyle": true,
+      "withStyle": false,
       "withStory": false,
       "withLazy": false,
       "withIndex": true,
@@ -39,7 +39,7 @@
         "index": "react-cli-templates/component/index.tsx"
       },
       "path": "src/app/components/UI",
-      "withStyle": true,
+      "withStyle": false,
       "withStory": false,
       "withLazy": false,
       "withIndex": true,
@@ -53,7 +53,7 @@
         "index": "react-cli-templates/component/index.tsx"
       },
       "path": "src/app/components/Business",
-      "withStyle": true,
+      "withStyle": false,
       "withStory": false,
       "withLazy": false,
       "withIndex": true,
@@ -67,7 +67,7 @@
         "index": "react-cli-templates/component/index.tsx"
       },
       "path": "src/app/components/Layout",
-      "withStyle": true,
+      "withStyle": false,
       "withStory": false,
       "withLazy": false,
       "withIndex": true,
@@ -83,7 +83,7 @@
       "path": "src/app/pages",
       "withLazy": false,
       "withStory": false,
-      "withStyle": true,
+      "withStyle": false,
       "withIndex": true,
       "withInterface": true
     }

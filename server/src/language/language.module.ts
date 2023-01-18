@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { LanguageService } from './language.service';
 import { LanguageController } from './language.controller';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Language } from './entity/language.entity';
+import { Language } from './models/language.model';
+import { SequelizeModule } from '@nestjs/sequelize';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Language])],
+  imports: [SequelizeModule.forFeature([Language])],
   controllers: [LanguageController],
   providers: [LanguageService],
 })

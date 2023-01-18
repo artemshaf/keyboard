@@ -4,23 +4,23 @@ import {
   KEYBOARD_PAGE,
   LEARNING_PAGE,
   TRAINING_PAGE,
-} from "@utils/consts";
+} from "@utils";
 
-export const navigation: ILink[] = [
+export const headerNavigation: ILink[] = [
   {
-    text: "Тестирование",
     link: KEYBOARD_PAGE,
+    i18Key: "KEYBOARD_PAGE.linkText",
   },
   {
-    text: "Обучение",
+    i18Key: "LEARNING_PAGE.linkText",
     link: LEARNING_PAGE,
   },
   {
-    text: "Тренировка",
+    i18Key: "TRAINING_PAGE.linkText",
     link: TRAINING_PAGE,
   },
   {
-    text: "Курсы",
+    i18Key: "COURSES_PAGE.linkText",
     link: COURSES_PAGE,
   },
 ];

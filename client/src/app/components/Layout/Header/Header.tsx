@@ -1,59 +1,70 @@
+import { Toolbar, AppBar, List, Box, colors } from "@mui/material";
+import type {} from "@mui/material/themeCssVarsAugmentation";
+import { styled } from "@mui/material/styles";
+import { useTranslation } from "react-i18next";
+
 import { IHeaderInterface } from "./Header.interface";
-import {
-  AppBar,
-  useScrollTrigger,
-  Slide,
-  List,
-  ListItem,
-  Box,
-  Typography,
-} from "@mui/material/";
-import KeyboardIcon from "@mui/icons-material/Keyboard";
-import { useState } from "react";
-import { CustomGrid } from "./components";
-import { navigation } from "../../../data";
+import { ModeSwithcer, Container, LanguageSwitcher, Logo } from "@components";
+import { headerNavigation } from "@data";
 import { Link } from "react-router-dom";
 
-interface Props {
-  window?: () => Window;
-  children: React.ReactElement;
-}
+const ToolbarStyled = styled(Toolbar)(
+  ({ theme }) => `
+  background-color: ${theme.palette.background.paper};
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 0;
 
-function HideOnScroll(props: Props) {
-  const { children, window } = props;
-  const trigger = useScrollTrigger({
-    target: window ? window() : undefined,
-  });
+  @media (max-width:${theme.breakpoints.values.md}px){
+    
+  };
+`
+);
 
-  return (
-    <Slide appear={false} direction="down" in={!trigger}>
-      {children}
-    </Slide>
-  );
-}
+const ListStyled = styled(List)(({ theme }) => ({
+  color: theme.palette.text.primary,
+  display: "flex",
+  columnGap: "40px",
+  alignItems: "center",
+}));
+
+const ContainerBox = styled(Box)(({ theme }) => ({
+  backgroundColor: theme.palette.background.default,
+  padding: "10px 0",
+}));
 
 export const Header = ({ className, ...props }: IHeaderInterface) => {
-  const [auth, setAuth] = useState<boolean>(true);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setAuth(event.target.checked);
-  };
+  const { t, i18n } = useTranslation();
 
   return (
-    <HideOnScroll {...props}>
-      <AppBar sx={{ position: "fixed", height: 100 }}>
-        <Box>
-          <KeyboardIcon color="error" fontSize="large" width={50} />
-          <Typography>Faster Key</Typography>
-        </Box>
-        <List sx={{ display: "flex" }}>
-          {navigation.map((item, index) => (
-            <ListItem key={`${item.link + index}`}>
-              <Link to={item.link}>{item.text}</Link>
-            </ListItem>
-          ))}
-        </List>
-      </AppBar>
-    </HideOnScroll>
+    <ContainerBox as={"header"}>
+      <Container maxWidth="xl">
+        <AppBar position="sticky">
+          <ToolbarStyled>
+            <Logo />
+            {headerNavigation.length > 0 ? (
+              <ListStyled>
+                {headerNavigation.map((item, index) => (
+                  <Link
+                    key={item.link + index}
+                    to={item.link}
+                    color={"inherit"}
+                  >
+                    {item.text ? item.text : t(`${item.i18Key}`, "Ooouupps")}
+                  </Link>
+                ))}
+              </ListStyled>
+            ) : (
+              <></>
+            )}
+            <Box display="flex" gap={2}>
+              <ModeSwithcer />
+              <LanguageSwitcher />
+            </Box>
+          </ToolbarStyled>
+        </AppBar>
+      </Container>
+    </ContainerBox>
   );
 };

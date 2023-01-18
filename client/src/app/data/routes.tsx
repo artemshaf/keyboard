@@ -8,8 +8,10 @@ import {
   TRAINING_PAGE,
   KEYBOARD_PAGE,
   KEYBOARD_LETTER_PAGE,
-} from "@utils/consts";
+  ACCOUNT_PAGE,
+} from "@utils";
 import {
+  AccountPage,
   CoursesPage,
   HomePage,
   KeyboardPage,
@@ -38,10 +40,10 @@ export const authRoutes: IRoute[] = [
     path: LEARNING_PAGE,
     element: <LearningPage />,
   },
-  // {
-  //   path: TEXTS_PAGE,
-  //   element: <div></div>,
-  // },
+  {
+    path: ACCOUNT_PAGE,
+    element: <AccountPage />,
+  },
   // {
   //   path: TRAINING_PAGE,
   //   element: <>,

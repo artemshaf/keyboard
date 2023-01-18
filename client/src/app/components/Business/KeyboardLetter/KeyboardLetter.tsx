@@ -1,125 +1,117 @@
-import { useEffect, useState } from "react";
-import cn from "classnames";
-import { Box, Typography } from "@mui/material";
+import { memo, useEffect, useId, useMemo, useRef, useState } from "react";
+import { useActions, useTopElementWatch } from "@hooks";
+import { selectKeyboardLetterState, useAppSelector } from "@store";
+import { correctWordId, getWordsOnKeyboardLetter } from "@helpers";
+import { Container, KeyboarsItems } from "@components";
+import { useKeyPress } from "@hooks";
+import { KeyboardLetterItem } from "./KeyboardLetterItem";
+import { russianPattern } from "@utils";
 
-import { ChangeEvent } from "react";
-import { useActions } from "@hooks";
-import { selectKeyboardState, useAppSelector } from "@store";
-import { getWordsOnKeyboardLetter } from "@helpers";
+const TEXT = `
+Жил-был купец, у него было два сына: Дмитрий да Иван. Раз, благословляя их на ночь, сказал им отец:
 
-const TEXT = `this text is test for my app on couse work in GSUthis text is test for my app on couse work in GSUthis text is test for my app on couse work in GSUthis text is test for my app on couse work in GSUthis text is test for my app on couse work in GSUthis text is test for my app on couse work in GSU`;
+— Ну, дети! Кому что во сне привидится — поутру мне поведайте; а кто утаит свой сон, того казнить велю.
+
+Вот на утро приходит старший сын и сказывает отцу:
+
+— Снилось мне, батюшка, будто брат Иван высоко летал по поднебесью на двенадцати орлах; да еще будто пропала у тебя любимая овца.
+
+— А тебе, Ваня, что привиделось?
+
+— Не скажу! — отвечал Иван.
+
+Сколько отец ни принуждал его, он уперся и на все увещания одно твердил: «Не скажу!» да «Не скажу!»
+
+Купец рассердился, позвал своих приказчиков и велел взять непослушного сына, раздеть донага и привязать к столбу на большой дороге.
+
+Приказчики схватили Ивана и, как сказано, привязали его нагишом к столбу крепко-накрепко. Плохо пришлось доброму молодцу: солнце печет его, комары кусают, голод и жажда измучили.
+
+
+
+Случилось ехать по той дороге молодому царевичу; увидал он купеческого сына, сжалился и велел освободить его, нарядил в свою одёжу, привез к себе во дворец и начал расспрашивать:
+
+— Кто тебя к столбу привязал?
+
+— Родной отец прогневался.
+
+— Чем же ты провинился?
+
+— Не хотел рассказать ему, что мне во сне привиделось.
+
+— Ах, как же глуп твой отец, за такую безделицу да так жестоко наказывать... А что тебе снилось?
+
+— Не скажу, царевич!
+
+— Как не скажешь? Я тебя от смерти избавил, а ты мне грубить хочешь? Говори сейчас, не то худо будет.
+
+— Отцу не сказал и тебе не скажу!
+
+Царевич приказал посадить в темницу; тотчас прибежали солдаты и отвели его, раба божьего, в каменной мешок.
+
+
+
+Прошел год, вздумал царевич жениться, собрался и поехал в чужедальнее государство свататься на Елене Прекрасной.
+
+У того царевича была родная сестра, и вскоре после его отъезда случилось ей гулять возле самой темницы. Увидал ее в окошечко Иван купеческой сын и закричал громким голосом:
+
+— Смилуйся, царевна! Выпусти меня на волю; может, и я пригожуся! Ведь я знаю, что царевич поехал на Елене Прекрасной свататься; только без меня ему не жениться, а разве головой поплатиться. Чай, сама слышала, какая хитрая Елена Прекрасная и сколько женихов на тот свет спровадила.
+`;
 
 export const KeyboardLetter = () => {
-  const [text, setText] = useState<string[]>(() =>
-    getWordsOnKeyboardLetter(TEXT)
+  const { addPositionLetter, addLetterIndex } = useActions();
+  const { history, position, status } = useAppSelector((state) =>
+    selectKeyboardLetterState(state)
   );
-  const [positionCurrentLetterHeight, setPositionCurrentLetterHeight] =
-    useState<number>(0);
-  const [position, setPosition] = useState<number>(0);
-  const [currentRow, setCurrentRow] = useState<number>(-1);
-  const [inputText, setInputText] = useState<string>("");
-  const { addCorrectWordIndex, addWrongWordIndex } = useActions();
-  const keyboardState = useAppSelector((state) => selectKeyboardState(state));
+  const usedText = useMemo(() => getWordsOnKeyboardLetter(TEXT), []);
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const currentText = e.target.value;
-    if (currentText === "") {
-      setInputText(currentText);
-    }
-    //! we can enter only 1 char
-    if (currentText.length > 1) return;
+  const pressedKey = useKeyPress({ pattern: russianPattern });
+
+  const currentTopPosition = useTopElementWatch(correctWordId, position);
+
+  const handleChange = (key: string | null) => {
+    if (!key) return;
+    const currentText = key;
     //! pause
-    if (keyboardState.status === "pause") return;
+    if (status === "pause") return;
     //! correct letter
-    if (currentText[0] === text[position]) {
-      setPosition((prev) => prev + 1);
-      setInputText("");
+    if (currentText === usedText[position]) {
+      addLetterIndex(true);
+      addPositionLetter();
       return;
     }
     //! wrong letter
-    addWrongWordIndex(position);
-    setInputText(currentText);
+    addLetterIndex(false);
+    addPositionLetter();
     return;
   };
 
   useEffect(() => {
-    // const top = document
-    //   .querySelector(".current-letter-highlight")
-    //   ?.getBoundingClientRect().top;
-    // if (!top) return;
-    // console.log(top);
-    // console.log(positionCurrentLetterHeight);
-    // if (top <= positionCurrentLetterHeight) {
-    //   return;
-    // }
-    // //! select correct row for shuffle top
-    // setPositionCurrentLetterHeight(top);
-    // setCurrentRow((prev) => prev + 1);
-  }, [position]);
+    handleChange(pressedKey);
+  }, [pressedKey]);
+  // console.log("render");
 
   return (
-    <div>
-      <Box
-        sx={{
-          mt: "300px",
-          width: "400px",
-          bgcolor: "grey",
-          borderRadius: "15px",
-          height: "200px",
-          overflow: "hidden",
-          whiteSpace: "normal",
-          userSelect: "none",
-          position: "relative",
-        }}
-      >
-        <Box
-          sx={{
-            position: "absolute",
-            top: `-${25 * (currentRow - 1)}px`,
-            zIndex: 100,
-            color: "red",
-            width: "100%",
-          }}
-        >
-          {text.map((letter, index) => (
-            <Typography
-              component="span"
-              sx={{
-                margin: "0",
-                width: "auto",
-                display: "inline-block",
-              }}
-              key={letter + index}
-              className={cn({
-                "wrong-write-letter":
-                  position === index &&
-                  text[position] !== inputText &&
-                  inputText,
-                "current-letter-highlight": position === index,
-
-                "correct-write-letter": position > index,
-                "letter-space": letter === " ",
-              })}
-            >
-              {letter}
-            </Typography>
-          ))}
-        </Box>
-      </Box>
-      <input
-        value={inputText}
-        onChange={handleChange}
-        autoFocus
-        style={{
-          height: 0,
-          overflow: "hidden",
-          border: "none",
-          // display: "none",
-        }}
-        maxLength={1}
-      />
-      <p>correct - {keyboardState.history.correct.length}</p>
-      <p>wrong - {keyboardState.history.wrong.length}</p>
-    </div>
+    <KeyboarsItems.WrapperBox>
+      <Container>
+        <KeyboarsItems.Box>
+          <KeyboarsItems.WordList
+            sx={({}) => ({
+              top: `-${currentTopPosition}px`,
+              transition: `top 0.4s ease`,
+            })}
+          >
+            {usedText.map((letter, index) => (
+              <KeyboardLetterItem
+                key={useId()}
+                letter={letter}
+                index={index}
+                history={history}
+                position={position}
+              />
+            ))}
+          </KeyboarsItems.WordList>
+        </KeyboarsItems.Box>
+      </Container>
+    </KeyboarsItems.WrapperBox>
   );
 };

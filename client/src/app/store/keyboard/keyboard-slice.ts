@@ -5,10 +5,8 @@ import { RootState } from "../store";
 const name = "keyboard";
 
 const initialState: IKeyboard = {
-  history: {
-    correct: [],
-    wrong: [],
-  },
+  history: {},
+  position: 0,
   status: "idle",
   text: "",
 };
@@ -25,11 +23,11 @@ export const keyboardSlice = createSlice({
         ? (state.status = "idle")
         : (state.status = "pause");
     },
-    addCorrectWordIndex: (state, action: PayloadAction<number>) => {
-      state.history.correct.push(action.payload);
+    addHistoryWordIndex: (state, action: PayloadAction<boolean | null>) => {
+      state.history = { ...state.history, [state.position]: action.payload };
     },
-    addWrongWordIndex: (state, action: PayloadAction<number>) => {
-      state.history.wrong.push(action.payload);
+    addPositionWord: (state) => {
+      state.position++;
     },
   },
 });

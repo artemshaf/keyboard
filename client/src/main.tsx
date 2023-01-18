@@ -1,10 +1,12 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import "@utils";
 import "./app/styles/main.scss";
+import { Loader } from "@components";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
+  <Suspense fallback={<Loader />}>
     <App />
-  </React.StrictMode>
+  </Suspense>
 );

@@ -1,0 +1,20 @@
+{
+  "name": "Artem",
+  "language": "Language",
+  "logo": {
+    "description": "QUICK-CLAVED"
+  },
+  "HOME_PAGE": {},
+  "KEYBOARD_PAGE": {
+    "linkText": "Testing"
+  },
+  "LEARNING_PAGE": {
+    "linkText": "Learning"
+  },
+  "TRAINING_PAGE": {
+    "linkText": "Training"
+  },
+  "COURSES_PAGE": {
+    "linkText": "Courses"
+  }
+}

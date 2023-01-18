@@ -1,0 +1,37 @@
+{
+  "name": "Артем",
+  "language": "Язык",
+  "logo": {
+    "description": "БЫСТРОКЛАВЫЙ"
+  },
+  "HOME_PAGE": {},
+  "KEYBOARD_PAGE": {
+    "linkText": "Тестирование"
+  },
+  "LEARNING_PAGE": {
+    "linkText": "Обучение"
+  },
+  "TRAINING_PAGE": {
+    "linkText": "Тренировка"
+  },
+  "COURSES_PAGE": {
+    "linkText": "Курсы"
+  },
+  "ABOUT_PAGE": {
+    "linkText": "О нас"
+  },
+  "RATING_PAGE": {
+    "linkText": "Рейтинг"
+  },
+  "HELP_PAGE": {
+    "linkText": "Помощь"
+  },
+  "CONTACTS_PAGE": {
+    "linkText": "Контакты"
+  },
+  "ACCOUNT_PAGE": {
+    "variantInfo": "Информация",
+    "variantText": "Работа с текстами",
+    "variantResult": "Ваши результаты"
+  }
+}

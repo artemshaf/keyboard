@@ -5,3 +5,4 @@ export * from "./KeyboardLetterPage";
 export * from "./LearningPage";
 export * from "./LoginPage";
 export * from "./LearningPage";
+export * from "./AccountPage";

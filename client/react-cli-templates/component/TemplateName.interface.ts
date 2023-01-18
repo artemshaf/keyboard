@@ -1,4 +1,3 @@
-import { DetailedHTMLProps, HTMLAttributes } from "react";
+import { BoxProps } from "@mui/system";
 
-export interface ITemplateNameInterface
-  extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
+export interface ITemplateNameInterface extends BoxProps {}

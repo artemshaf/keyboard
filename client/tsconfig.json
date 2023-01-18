@@ -18,8 +18,8 @@
     "paths": {
       "@components": ["./app/components/index.tsx"],
       "@pages": ["./app/pages/index.tsx"],
-      "@utils/*": ["./app/utils/*"],
-      "@data/*": ["./app/data/*"],
+      "@utils": ["./app/utils/index.ts"],
+      "@data": ["./app/data/index.tsx"],
       "@helpers": ["./app/helpers/index.ts"],
       "@store": ["./app/store/index.ts"],
       "@hooks": ["./app/hooks/index.tsx"],

@@ -1,6 +1,6 @@
 import { IRoute } from "@interfaces";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { authRoutes, publicRoutes } from "@data/routes";
+import { authRoutes, publicRoutes } from "@data";
 
 export const AppRouter = () => {
   return (
@@ -15,7 +15,3 @@ export const AppRouter = () => {
     </Routes>
   );
 };
-
-/*
-
-*/
