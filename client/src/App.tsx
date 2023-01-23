@@ -1,7 +1,7 @@
 import { AppRouter, withLayout } from "@components";
 
-function App() {
+export const App = () => {
   return <AppRouter />;
-}
+};
 
 export default withLayout(App);

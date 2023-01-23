@@ -5,3 +5,4 @@ export * from "./Clickbait";
 export * from "./FAQ";
 export * from "./ShortPromo";
 export * from "./Loader";
+export * from "./Modal";
