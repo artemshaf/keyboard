@@ -27,11 +27,11 @@ export class UserText extends Model<UserText, UserTextCreationAttributes> {
 
   @ApiProperty({ example: '23', description: 'ID пользователя' })
   @ForeignKey(() => User)
-  @Column({ type: DataType.NUMBER, allowNull: false })
+  @Column({ type: DataType.INTEGER, allowNull: false })
   userId: number;
 
   @ApiProperty({ example: '1223', description: 'ID текста' })
   @ForeignKey(() => Text)
-  @Column({ type: DataType.NUMBER, allowNull: false })
+  @Column({ type: DataType.INTEGER, allowNull: false })
   textId: number;
 }

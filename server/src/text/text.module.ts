@@ -7,7 +7,7 @@ import { UserText } from './models/uset-text.model';
 import { User } from '../user/models/user.model';
 
 @Module({
-  imports: [SequelizeModule.forFeature([Text, UserText, User])],
+  imports: [SequelizeModule.forFeature([Text, User, UserText])],
   controllers: [TextController],
   providers: [TextService],
   exports: [TextService],

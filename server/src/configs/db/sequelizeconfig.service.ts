@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { SequelizeOptionsFactory } from '@nestjs/sequelize';
 import { SequelizeModuleOptions } from '@nestjs/sequelize/dist';
+import { Sequelize } from 'sequelize';
 import { Language } from '../../language/models/language.model';
 import { Result } from '../../result/models/result.model';
 import { Role } from '../../role/models/role.model';
@@ -17,19 +18,20 @@ export class SequelizeConfigService implements SequelizeOptionsFactory {
 
   createSequelizeOptions(): SequelizeModuleOptions {
     const {
-      pg: { dialect, host, port, username, password, database },
+      pg: { ssl, dialect, host, port, username, password, database },
     } = this.configService.get(EnumConfig.DATABASE);
 
     return {
+      synchronize: this.configService.get('DATABASE_SYNCHRONIZE') || true,
       dialect,
       host,
       port,
       username,
       password,
       database,
-      synchronize: true,
       autoLoadModels:
         this.configService.get('DATABASE_AUTO_LOAD_MODELS') || true,
+      ssl,
     };
   }
 }

@@ -8,7 +8,7 @@ export class Language extends Model {
     description: 'ID языка',
   })
   @Column({
-    type: DataType.NUMBER,
+    type: DataType.INTEGER,
     primaryKey: true,
     autoIncrement: true,
     unique: true,

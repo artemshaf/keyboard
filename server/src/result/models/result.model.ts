@@ -24,11 +24,11 @@ export class Result extends Model<Result, ResultCreationAttributes> {
   id: number;
 
   @ApiProperty({ example: '1412', description: 'ID пользователя' })
-  @Column({ type: DataTypes.NUMBER, allowNull: false })
+  @Column({ type: DataTypes.INTEGER, allowNull: false })
   userId: number;
 
   @ApiProperty({ example: '142', description: 'ID текста' })
-  @Column({ type: DataTypes.NUMBER, allowNull: false })
+  @Column({ type: DataTypes.INTEGER, allowNull: false })
   textId: number;
 
   @ApiProperty({ example: '[1,2,3,5]', description: 'Правильные позиции' })

@@ -9,10 +9,11 @@ export const pgConfig = registerAs(
     return {
       dialect: <Dialect>process.env.SQL_DIALECT || 'postgres',
       host: process.env.DATABASE_HOST,
-      port: +process.env.DATABASE_PORT || 3001,
+      port: +process.env.DATABASE_PORT || 5432,
       username: process.env.DATABASE_USER,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_DATABASE,
+      ssl: true,
     };
   },
 );

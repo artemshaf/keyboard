@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
+  BelongsTo,
   Column,
   DataType,
   ForeignKey,
@@ -7,10 +8,17 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { User } from '../../user/models/user.model';
-import { Role } from './role.model';
 
-@Table({ createdAt: false, updatedAt: false })
-export class UserRole extends Model<UserRole> {
+interface ICreationRefreshTokenAttributes {
+  userId: number;
+  refreshToken: string;
+}
+
+@Table
+export class RefreshToken extends Model<
+  RefreshToken,
+  ICreationRefreshTokenAttributes
+> {
   @ApiProperty({ example: '1', description: 'ID' })
   @Column({
     type: DataType.INTEGER,
@@ -25,8 +33,13 @@ export class UserRole extends Model<UserRole> {
   @Column({ type: DataType.INTEGER, allowNull: false })
   userId: number;
 
-  @ApiProperty({ example: '23', description: 'ID роли' })
-  @ForeignKey(() => Role)
-  @Column({ type: DataType.INTEGER, allowNull: false })
-  roleId: number;
+  @BelongsTo(() => User)
+  user: User;
+
+  @ApiProperty({
+    example: 'falsflsalfasl/asfkk312.afszsl^71213/',
+    description: 'RefreshToken',
+  })
+  @Column({ type: DataType.STRING, allowNull: false })
+  refreshToken: string;
 }

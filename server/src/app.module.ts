@@ -9,7 +9,9 @@ import { TextModule } from './text/text.module';
 import { UserModule } from './user/user.module';
 import { LanguageModule } from './language/language.module';
 import { RoleModule } from './role/role.module';
-
+import { TokenModule } from './token/token.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AccessTokenGuard } from './auth/guards/access-token.guard';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -19,14 +21,21 @@ import { RoleModule } from './role/role.module';
       imports: [ConfigModule],
       useClass: SequelizeConfigService,
     }),
+    UserModule,
+    RoleModule,
+    AuthModule,
+    LanguageModule,
     TextModule,
     ResultModule,
-    UserModule,
-    LanguageModule,
-    AuthModule,
-    RoleModule,
+    TokenModule,
   ],
   controllers: [],
-  providers: [SequelizeConfigService],
+  providers: [
+    SequelizeConfigService,
+    {
+      provide: APP_GUARD,
+      useClass: AccessTokenGuard,
+    },
+  ],
 })
 export class AppModule {}

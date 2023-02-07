@@ -1,14 +1,15 @@
 import { Body, Controller, Post, Get, HttpStatus } from '@nestjs/common';
 import { Patch, UseGuards } from '@nestjs/common/decorators';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { AccessTokenGuard } from '../auth/guards/access-token.guard';
 import { Roles } from '../auth/role.decorator';
-import { RolesAuthGuard } from '../auth/rolesauth.guard';
+import { RolesAuthGuard } from '../auth/guards/rolesauth.guard';
 import { AddRoleUserDto } from './dto/add-role-user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './models/user.model';
 import { UserService } from './user.service';
 
-@ApiTags('Пользователь(user)')
+@ApiTags('user')
 @Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}
@@ -34,7 +35,7 @@ export class UserController {
     return this.userService.getUserByEmail(email.email);
   }
 
-  @ApiOperation({ summary: 'Выать роль' })
+  @ApiOperation({ summary: 'Выдать роль' })
   @ApiResponse({ status: HttpStatus.OK, type: [User] })
   @Roles('admin')
   @UseGuards(RolesAuthGuard)

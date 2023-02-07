@@ -28,6 +28,6 @@ export class Text extends Model<Text, TextCreationAttributes> {
     example: '421',
     description: 'ID языка, на котором написан текст',
   })
-  @Column({ type: DataType.NUMBER, allowNull: false })
+  @Column({ type: DataType.INTEGER, allowNull: false })
   languageId: number;
 }

@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { JwtService } from '@nestjs/jwt';
-import { ROLES_KEY, ROLE_NOT_ALLOW_SUCCESS } from './auth.constants';
+import { ROLES_KEY, ROLE_NOT_ALLOW_SUCCESS } from '../auth.constants';
 
 @Injectable()
 export class RolesAuthGuard implements CanActivate {

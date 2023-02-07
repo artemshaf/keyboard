@@ -16,6 +16,7 @@ async function bootstrap() {
   SwaggerModule.setup('/api/docs', app, swaggerDocument);
 
   app.useGlobalPipes(new ValidationPipe());
+  app.enableCors();
   await app.listen(4001);
   console.log(`Server start on url -> ${await app.getUrl()}`);
 }

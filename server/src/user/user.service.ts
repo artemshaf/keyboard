@@ -42,6 +42,11 @@ export class UserService {
     return user;
   }
 
+  async getUserById(userId: number) {
+    const user = await this.userRepository.findByPk(userId);
+    return user;
+  }
+
   async addRole(useRoleDto: AddRoleUserDto) {
     const user = await this.userRepository.findByPk(useRoleDto.userId);
     if (!user) {
