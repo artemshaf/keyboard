@@ -32,7 +32,9 @@ export class TokenService {
   }
 
   async updateRefreshToken(userId: number, refreshToken: string) {
-    const token = await this.getRefreshTokenByUserId(userId);
+    const token = await this.refreshTokenRepository.findOne({
+      where: { userId },
+    });
     const hashedRefreshToken = await hash(refreshToken, 6);
     if (!token) {
       return this.refreshTokenRepository.create({

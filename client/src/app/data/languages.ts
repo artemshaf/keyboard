@@ -5,6 +5,6 @@ export const languages: ILanguages = {
     nativeName: "English",
   },
   ru: {
-    nativeName: "Russian",
+    nativeName: "Русский",
   },
 };

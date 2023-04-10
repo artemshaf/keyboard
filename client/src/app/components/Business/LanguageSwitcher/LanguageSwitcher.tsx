@@ -40,6 +40,7 @@ export const LanguageSwitcher = ({ ...props }: ILanguageSwitcherInterface) => {
         labelId="languageSwitcherLabelId"
         id="languageSwitcherId"
         variant="outlined"
+        sx={{ color: "white" }}
       >
         {languages ? (
           Object.keys(languages).map((lang) => (

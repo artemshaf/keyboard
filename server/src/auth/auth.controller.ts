@@ -10,6 +10,7 @@ import { IsPublic } from './decorators/public.decorator';
 import { RefreshTokenGuard } from './guards/refresh-token.guard';
 import { CurrentUser } from '../token/decorators/current-user.decorator';
 import { JwtPayloadWithRefrToken } from './types';
+import { LoginDto } from '../dto/login.dto';
 
 @ApiTags('Авторизация(Auth)')
 @Controller('auth')
@@ -20,8 +21,7 @@ export class AuthController {
   @ApiResponse({ status: HttpStatus.OK, type: User })
   @IsPublic()
   @Post('/login')
-  async login(@Body() userDto: CreateUserDto) {
-    console.log(1);
+  async login(@Body() userDto: LoginDto) {
     return this.authService.login(userDto);
   }
 
@@ -29,6 +29,7 @@ export class AuthController {
   @ApiResponse({
     status: HttpStatus.OK,
   })
+  @IsPublic()
   @Post('/registration')
   async registration(@Body() userDto: CreateUserDto) {
     return this.authService.registration(userDto);

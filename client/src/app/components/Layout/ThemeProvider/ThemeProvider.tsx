@@ -25,13 +25,6 @@ const themeLight = createTheme(
       },
     },
     components: {
-      MuiSelect: {
-        styleOverrides: {
-          outlined: {
-            color: colors.common.white,
-          },
-        },
-      },
       MuiPaper: {
         styleOverrides: {
           root: {

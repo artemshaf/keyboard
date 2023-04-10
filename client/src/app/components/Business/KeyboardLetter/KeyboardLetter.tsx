@@ -1,6 +1,11 @@
 import { memo, useEffect, useId, useMemo, useRef, useState } from "react";
-import { useActions, useTopElementWatch } from "@hooks";
-import { selectKeyboardLetterState, useAppSelector } from "@store";
+import { useTopElementWatch } from "@hooks";
+import {
+  selectKeyboardState,
+  useAppSelector,
+  useActions,
+  storeActions,
+} from "@store";
 import { correctWordId, getWordsOnKeyboardLetter } from "@helpers";
 import { Container, KeyboarsItems } from "@components";
 import { useKeyPress } from "@hooks";
@@ -58,9 +63,9 @@ const TEXT = `
 `;
 
 export const KeyboardLetter = () => {
-  const { addPositionLetter, addLetterIndex } = useActions();
+  const { addPositionWord, addHistoryWordIndex } = useActions(storeActions);
   const { history, position, status } = useAppSelector((state) =>
-    selectKeyboardLetterState(state)
+    selectKeyboardState(state)
   );
   const usedText = useMemo(() => getWordsOnKeyboardLetter(TEXT), []);
 
@@ -75,13 +80,13 @@ export const KeyboardLetter = () => {
     if (status === "pause") return;
     //! correct letter
     if (currentText === usedText[position]) {
-      addLetterIndex(true);
-      addPositionLetter();
+      // addPositionWord(1);
+      // addHistoryWordIndex(1);
       return;
     }
     //! wrong letter
-    addLetterIndex(false);
-    addPositionLetter();
+    // addPositionWord(1);
+    // addHistoryWordIndex(1);
     return;
   };
 

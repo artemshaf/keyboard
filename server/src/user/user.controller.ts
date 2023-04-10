@@ -8,6 +8,7 @@ import { AddRoleUserDto } from './dto/add-role-user.dto';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './models/user.model';
 import { UserService } from './user.service';
+import { IsPublic } from '../auth/decorators/public.decorator';
 
 @ApiTags('user')
 @Controller('user')
@@ -30,7 +31,8 @@ export class UserController {
 
   @ApiOperation({ summary: 'Получить пользователя по почте' })
   @ApiResponse({ status: HttpStatus.OK, type: User })
-  @Get('/email')
+  @IsPublic()
+  @Post('/email')
   async getUserByEmail(@Body() email: any) {
     return this.userService.getUserByEmail(email.email);
   }

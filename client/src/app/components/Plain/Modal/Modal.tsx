@@ -7,7 +7,9 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/system";
 import { useState } from "react";
+import { useAppDispatch } from "@store";
 import { IModalInterface } from "./Modal.interface";
+import { login } from "../../../store/account";
 
 const ModalStyled = styled(ModalComponent)(({ theme }) => ({
   display: "flex",
@@ -36,6 +38,12 @@ export const Modal = ({ children, ...props }: IModalInterface) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const dispatch = useAppDispatch();
+
+  const testThunk = () => {
+    // dispatch(login());
+  };
+
   if (isRegister) {
     return (
       <ModalStyled
@@ -48,7 +56,9 @@ export const Modal = ({ children, ...props }: IModalInterface) => {
           <Typography
             sx={{ mx: "auto", display: "block" }}
             variant="h4"
-            onClick={() => setIsRegister(false)}
+            onClick={() => {
+              testThunk();
+            }}
           >
             Регистрация
           </Typography>
@@ -74,7 +84,9 @@ export const Modal = ({ children, ...props }: IModalInterface) => {
         <Typography
           sx={{ mx: "auto", display: "block" }}
           variant="h4"
-          onClick={() => setIsRegister(false)}
+          onClick={() => {
+            testThunk();
+          }}
         >
           Войдите в учетную запись
         </Typography>

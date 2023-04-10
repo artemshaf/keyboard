@@ -24,7 +24,11 @@ export const Layout = ({ children, ...props }: ILayoutInterface) => {
   return (
     <LayoutStyled>
       <Header />
-      <Box component="main" {...props}>
+      <Box
+        sx={({ palette }) => ({ backgroundColor: palette.background.default })}
+        component="main"
+        {...props}
+      >
         {children}
       </Box>
       <Footer />

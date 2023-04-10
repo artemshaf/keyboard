@@ -4,10 +4,6 @@ export const blackKeyboardSrc = `${pathToImages}blackKeyboard.png`;
 export const whiteKeyboardSrc = `${pathToImages}whiteKeyboard.png`;
 export const vkKeyboardSrc = `${pathToImages}/socials/vk.svg`;
 
-// const punctuationMarksAndNumbers = '0-9_.,/#?!$%^&*;:{}[]=<>\\|_`~()@"';
-// const russianLettersPattern = "а-яА-яёЁ";
-// const englishLettersPattern = "a-zA-Z";
-
 export const regExpFlags = "gi";
 
 export const russianPattern = new RegExp(
@@ -20,6 +16,7 @@ export const englishPattern = new RegExp(
 );
 export const HOME_PAGE = "/";
 export const LOGIN_PAGE = "/login";
+export const REGISTRATION_PAGE = "/registration";
 
 export const TRAINING_PAGE = "/training";
 export const LEARNING_PAGE = "/learning";
@@ -37,3 +34,9 @@ export const ACCOUNT_PAGE = "/account";
 
 export const VK_LINK = "https://vk.com/artsss02";
 export const TELEGRAM_LINK = "https://t.me/shafArt";
+
+export const LOADING_CONSTANTS = {
+  REJECTED: "/rejected",
+  FULFILLED: "/fulfilled",
+  PENDING: "/pending",
+};

@@ -9,6 +9,7 @@ import {
   KEYBOARD_PAGE,
   KEYBOARD_LETTER_PAGE,
   ACCOUNT_PAGE,
+  REGISTRATION_PAGE,
 } from "@utils";
 import {
   AccountPage,
@@ -17,6 +18,7 @@ import {
   KeyboardPage,
   LearningPage,
   LoginPage,
+  RegistrationPage,
 } from "@pages";
 import { KeyboardLetterPage } from "@pages";
 
@@ -44,10 +46,10 @@ export const authRoutes: IRoute[] = [
     path: ACCOUNT_PAGE,
     element: <AccountPage />,
   },
-  // {
-  //   path: TRAINING_PAGE,
-  //   element: <>,
-  // },
+  {
+    path: REGISTRATION_PAGE,
+    element: <RegistrationPage />,
+  },
   {
     path: KEYBOARD_PAGE,
     element: <KeyboardPage />,

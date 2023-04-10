@@ -23,6 +23,7 @@
       "@helpers": ["./app/helpers/index.ts"],
       "@store": ["./app/store/index.ts"],
       "@hooks": ["./app/hooks/index.tsx"],
+      "@api": ["./app/api/index.tsx"],
       "@interfaces": ["./app/interfaces/index.ts"]
     },
     "jsx": "react-jsx"

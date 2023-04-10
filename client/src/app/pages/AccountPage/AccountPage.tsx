@@ -5,9 +5,9 @@ import { useTranslation } from "react-i18next";
 
 import { accountVariants, TAccountVariants } from "@data";
 import {
-  AccountInfo,
-  AccountResult,
-  AccountText,
+  AccountInfoBig,
+  AccountResults,
+  AccountTexts,
   Container,
   Loader,
 } from "@components";
@@ -26,10 +26,12 @@ const AccoutPageBox = styled(Box)(({ theme }) => ({
   display: "flex",
   flexDirection: "row",
   justifyContent: "start",
-  alignItems: "center",
 }));
 
 const AccoutPageVariantsList = styled(Box)(({ theme }) => ({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
   width: "200px",
   ["& > li"]: {
     color: colors.common.black,
@@ -54,9 +56,9 @@ export const AccountPage = ({ ...props }: IAccountPageInterface) => {
   const getCorrectComponent = (
     component: componentVariant<TAccountVariants>
   ): JSX.Element => {
-    if (component.variantState === "info") return <AccountInfo />;
-    if (component.variantState === "result") return <AccountResult />;
-    return <AccountText />;
+    if (component.variantState === "info") return <AccountInfoBig />;
+    if (component.variantState === "result") return <AccountResults />;
+    return <AccountTexts />;
   };
 
   return (

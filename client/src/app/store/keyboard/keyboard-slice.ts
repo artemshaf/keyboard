@@ -1,22 +1,51 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IKeyboard } from "@interfaces";
-import { RootState } from "../store";
+import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  ICreateResultDto,
+  IKeyboardInitial,
+  ILoadTextDto,
+  KeyboardType,
+} from "@interfaces";
+import { RootState } from "@store";
+import { api, API_ROUTES } from "@api";
 
 const name = "keyboard";
 
-const initialState: IKeyboard = {
-  history: {},
+export const loadText = createAsyncThunk<void, ILoadTextDto>(
+  "account/login",
+  async (data, { getState }) => {
+    console.log(data);
+    const response = await api.post(API_ROUTES.login, data);
+    return response.data;
+  }
+);
+
+export const loadResult = createAsyncThunk<void, ICreateResultDto>(
+  "account/login",
+  async (data, { getState }) => {
+    console.log(data);
+    const response = await api.post(API_ROUTES.login, data);
+    return response.data;
+  }
+);
+
+const initialState: IKeyboardInitial = {
+  history: {
+    correct: [],
+    wrong: [],
+  },
   position: 0,
   status: "idle",
   text: "",
+  type: "Word",
 };
 
 export const keyboardSlice = createSlice({
   name,
   initialState,
   reducers: {
-    setInitial: (state) => {
+    setInitial: (state, action: PayloadAction<KeyboardType>) => {
       state = initialState;
+      state.type = action.payload;
     },
     togglePause: (state) => {
       state.status === "pause"

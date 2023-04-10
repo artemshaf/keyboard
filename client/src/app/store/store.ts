@@ -1,13 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
-import {
-  keyboardReducer,
-  keyboardLetterSlice,
-  keyboardLetterReducer,
-} from "./index";
+import { accountReducer } from "./account";
+import { keyboardReducer } from "./index";
+import { loginReducer } from "./login";
+import { registrationReducer } from "./registration";
+import { resultReducer } from "./result";
+import { textReducer } from "./text";
 
 const reducer = {
   keyboard: keyboardReducer,
-  keyboardLetter: keyboardLetterReducer,
+  account: accountReducer,
+  text: textReducer,
+  result: resultReducer,
+  login: loginReducer,
+  registration: registrationReducer,
 };
 
 export const store = configureStore({

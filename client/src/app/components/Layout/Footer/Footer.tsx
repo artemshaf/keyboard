@@ -39,7 +39,7 @@ export const Footer = ({ ...props }: IFooterInterface) => {
 
   return (
     <FooterBox as={"footer"} {...props}>
-      <Container>
+      <Container maxWidth="xl">
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <NavigationList>
             {footerNavigation.map((link) => (

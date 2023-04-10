@@ -23,19 +23,24 @@ export class ResultService {
 
     let wordResult = {
       count: 0,
-      worse: 100,
+      worse: 0,
       best: 0,
     };
+
     let letterResult = {
       count: 0,
-      worse: 100,
+      worse: 0,
       best: 0,
     };
 
     allUserResults.map((item) => {
-      console.log(item.correct.length);
       const bestStatistic = +(
         (item.correct.length / (item.wrong.length + item.correct.length)) *
+        100
+      ).toFixed(2);
+
+      const worseStatistic = +(
+        (item.wrong.length / (item.wrong.length + item.correct.length)) *
         100
       ).toFixed(2);
 
@@ -45,8 +50,9 @@ export class ResultService {
           best:
             wordResult.best > bestStatistic ? wordResult.best : bestStatistic,
           worse: +(
-            100 -
-            (wordResult.best > bestStatistic ? wordResult.best : bestStatistic)
+            wordResult.worse > worseStatistic
+              ? wordResult.worse
+              : worseStatistic
           ).toFixed(2),
         };
         return;
@@ -57,10 +63,9 @@ export class ResultService {
         best:
           letterResult.best > bestStatistic ? letterResult.best : bestStatistic,
         worse: +(
-          100 -
-          (letterResult.best > bestStatistic
-            ? letterResult.best
-            : bestStatistic)
+          letterResult.worse > worseStatistic
+            ? letterResult.worse
+            : worseStatistic
         ).toFixed(2),
       };
       return;

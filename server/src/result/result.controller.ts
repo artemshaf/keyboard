@@ -26,7 +26,7 @@ export class ResultController {
   }
 
   @ApiOperation({ summary: 'Получить статистику по результам пользователя' })
-  // @ApiResponse({ status: HttpStatus.OK, type: Result })
+  @ApiResponse({ status: HttpStatus.OK, type: Result })
   @Get('/statistic/:id')
   async getResultStatisticByUserId(@Param('id') id: number) {
     return this.resultService.getResultStatisticByUserId(id);

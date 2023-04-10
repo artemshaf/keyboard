@@ -21,7 +21,7 @@ export class Text extends Model<Text, TextCreationAttributes> {
     example: 'Этот текст написан на русском языке',
     description: 'Текст для дополнения',
   })
-  @Column({ type: DataType.STRING, allowNull: false })
+  @Column({ type: DataType.TEXT, allowNull: false })
   text: string;
 
   @ApiProperty({

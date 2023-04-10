@@ -7,8 +7,13 @@ import {
 } from "@helpers";
 import { IKeyboardInterface } from "./Keyboard.interface";
 import { ChangeEvent } from "react";
-import { useActions, useKeyPress, useTopElementWatch } from "@hooks";
-import { selectKeyboardState, useAppSelector } from "@store";
+import { useKeyPress, useTopElementWatch } from "@hooks";
+import {
+  selectKeyboardState,
+  storeActions,
+  useActions,
+  useAppSelector,
+} from "@store";
 import { Container, KeyboarsItems, KeyboardItem } from "@components";
 import { russianPattern } from "@utils";
 
@@ -65,7 +70,7 @@ const TEXT = `
 export const Keyboard = ({ className, ...props }: IKeyboardInterface) => {
   const [text, setText] = useState<string[]>(() => getWordsOnKeyboard(TEXT));
   const [inputText, setInputText] = useState<string>("");
-  const { addHistoryWordIndex, addPositionWord } = useActions();
+  const { addHistoryWordIndex, addPositionWord } = useActions(storeActions);
   const { history, position, status } = useAppSelector((state) =>
     selectKeyboardState(state)
   );

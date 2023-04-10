@@ -39,6 +39,9 @@ export class UserService {
         all: true,
       },
     });
+    if (!user) {
+      throw new HttpException(USER_NOT_EXISTS, HttpStatus.NOT_FOUND);
+    }
     return user;
   }
 

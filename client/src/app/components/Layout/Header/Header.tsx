@@ -1,10 +1,29 @@
-import { Toolbar, AppBar, List, Box, colors } from "@mui/material";
+import {
+  Toolbar,
+  AppBar,
+  List,
+  Box,
+  colors,
+  Tooltip,
+  IconButton,
+  Avatar,
+  Menu,
+  MenuItem,
+  Divider,
+  ListItemIcon,
+} from "@mui/material";
 import type {} from "@mui/material/themeCssVarsAugmentation";
 import { styled } from "@mui/material/styles";
 import { useTranslation } from "react-i18next";
 
 import { IHeaderInterface } from "./Header.interface";
-import { ModeSwithcer, Container, LanguageSwitcher, Logo } from "@components";
+import {
+  ModeSwithcer,
+  Container,
+  LanguageSwitcher,
+  Logo,
+  AccountHeader,
+} from "@components";
 import { headerNavigation } from "@data";
 import { Link } from "react-router-dom";
 
@@ -62,6 +81,7 @@ export const Header = ({ className, ...props }: IHeaderInterface) => {
               <ModeSwithcer />
               <LanguageSwitcher />
             </Box>
+            <AccountHeader />
           </ToolbarStyled>
         </AppBar>
       </Container>

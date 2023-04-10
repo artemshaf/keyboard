@@ -26,6 +26,20 @@ export class User extends Model<User, IUserCreationAttributes> {
   id: number;
 
   @ApiProperty({
+    example: 'Артем',
+    description: 'Имя',
+  })
+  @Column({ type: DataType.STRING, allowNull: false })
+  name: string;
+
+  @ApiProperty({
+    example: 'Яковцев',
+    description: 'Фамилия',
+  })
+  @Column({ type: DataType.STRING, allowNull: false })
+  surname: string;
+
+  @ApiProperty({
     example: 'example@gmail.com',
     description: 'Почтовый адрес пользователя',
   })
